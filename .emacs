@@ -55,3 +55,8 @@
 ;; ========== Lisp environment =====
 (setq inferior-lisp-program "sbcl")
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
+
+;; ========== Custom modes =========
+;; If you're not me, you almost certainly don't need/want this section 
+(add-to-list 'load-path "~/Documents/txtnotes")
+(require 'note-mode)
