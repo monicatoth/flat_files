@@ -46,6 +46,20 @@
 (setq mouse-sel-mode 5)
 (defun track-mouse (e))
 
+;; ========= Copy & Paste ==========
+;; Allows you to copy & paste between emacs and the Mac clipboard
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
+
 ;; ========= Split screens =========
 (global-set-key (kbd "M-3") 'delete-other-windows) ; expand current pane
 (global-set-key (kbd "M-4") 'split-window-vertically) ; split pane top/bottom
